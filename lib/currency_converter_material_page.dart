@@ -10,6 +10,11 @@ class CurrencyConverterMaterialPage extends StatefulWidget{
 class _CurrencyConverterMaterialPageState extends State<CurrencyConverterMaterialPage>{
   double result = 0;
   final TextEditingController textEditingController = TextEditingController();
+  void convert(){
+    setState(() {
+        result = double.parse(textEditingController.text)*94.41.round();
+    });
+  }
   @override
   Widget build(BuildContext context) {    
     final border = OutlineInputBorder(
@@ -29,7 +34,7 @@ class _CurrencyConverterMaterialPageState extends State<CurrencyConverterMateria
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "INR : $result",
+              "INR : ${result !=0 ? result.toStringAsFixed(2) : 0}",
               style: TextStyle(fontSize: 40.2, fontWeight: FontWeight.bold),
             ),
             const Text(
@@ -58,11 +63,7 @@ class _CurrencyConverterMaterialPageState extends State<CurrencyConverterMateria
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: ElevatedButton(
-                onPressed: () {                  
-                  setState(() {
-                    result = double.parse(textEditingController.text)*94.41.round();
-                  });
-                },
+                onPressed: convert,
                 style: ButtonStyle(
                   backgroundColor: const WidgetStatePropertyAll(
                     Color.fromRGBO(0, 0, 0, 1),
